@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Cart;
+use App\Models\sizeChart;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -14,7 +15,9 @@ class DetailController extends Controller
     public function index(Request $request, $id)
     {
         $product = Product::with(['galleries', 'user'])->where('slug', $id)->firstOrFail();
+        $size =  SizeChart::where('categories_id', $product->categories_id)->get();
         return view('pages.detail', [
+            'size' => $size,
             'product' => $product
         ]);
     }
@@ -25,7 +28,9 @@ class DetailController extends Controller
         $data = [
             'products_id' => $id,
             'users_id' => Auth::user()->id,
-            'quantity' => $_POST['quantity']
+            'quantity' => $_POST['quantity'],
+            'sizechart_id' => $_POST['sizechart_id']
+
         ];
         Cart::create($data);
 

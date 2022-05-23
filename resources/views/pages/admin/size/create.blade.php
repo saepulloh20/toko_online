@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Category
+    Create Size Chart
 @endsection
 
 @section('content')
@@ -25,25 +25,25 @@
                         @endif
                         <div class="card">
                             <div class="card-body">
-                                <form action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('admin-size/store') }}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Nama Kategori</label>
-                                                <input type="text" name="name" class="form-control" required>
+                                                <label>Kategori product</label>
+                                                <select name="categories_id" class="form-control">
+                                                    @foreach ($categories as $category)
+                                                        <option value="{{ $category->id }}">{{ $category->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Size Chart Category</label>
-                                                <input type="file" name="photo" class="form-control" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Foto</label>
-                                                <input type="file" name="photo" class="form-control" required>
+                                                <label>Size</label>
+                                                <input type="text" name="size" class="form-control" required>
                                             </div>
                                         </div>
                                     </div>

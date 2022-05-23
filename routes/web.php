@@ -80,6 +80,10 @@ Route::prefix('admin')
         Route::post('/products/{id}', [App\Http\Controllers\Admin\DashboardProductController::class, 'update'])->name('admin/products-update');
         Route::post('/products/delete/{id}', [App\Http\Controllers\Admin\DashboardProductController::class, 'destroy'])->name('admin/products-destroy');
 
+        Route::get('size', [App\Http\Controllers\Admin\DashboardSizeController::class, 'index'])->name('admin-size');
+        Route::get('size/create', [App\Http\Controllers\Admin\DashboardSizeController::class, 'create'])->name('admin-size/create');
+        Route::post('size/store', [App\Http\Controllers\Admin\DashboardSizeController::class, 'store'])->name('admin-size/store');
+
 
         Route::post('product/upload', [App\Http\Controllers\Admin\DashboardProductController::class, 'uploadGallery'])->name('products-gallery-upload');
         Route::get('product/delete/{id}', [App\Http\Controllers\Admin\DashboardProductController::class, 'deleteGallery'])->name('products-gallery-delete');

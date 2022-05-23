@@ -16,6 +16,7 @@ class TransactionDetail extends Model
         'products_id',
         'price',
         'quantity',
+        'sizechart_id',
         'shipping_status',
         'resi',
         'code'

@@ -75,31 +75,40 @@
                             <h1>{{ $product->name }}</h1>
                             <div class="owner">By {{ $product->user->store_name }}</div>
                             <div class="price">Rp. {{ number_format($product->price) }}</div>
-                        </div>
-                        <div class="col-lg-2" data-aos="zoom-in">
                             @auth
                                 <form action="{{ route('detail-add', $product->id) }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
-                                    <div class="row d-flex flex-row justify-content-center">
-                                        <div class="mb-4">
-                                            <button class="btn btn-success" id="incrementValueMin">
-                                                -
-                                            </button>
-                                        </div>
-                                        <div class="  mb-4">
-                                            <input id="qtyProduct" type="text" name="quantity" style="width: 30px"
-                                                class="m-1 mt-1 justify-content-center" value="1">
-                                        </div>
-                                        <div class="mb-4">
-                                            <button class="btn btn-success" id="incrementValue">
-                                                +
-                                            </button>
-                                        </div>
+                                    <div class="form-group">
+                                        <label for="sizechart_id">Size Chart</label>
+                                        <select v-model="sizechart_id" name="sizechart_id">
+                                            @foreach ($size as $sizes)
+                                                <option value="{{ $sizes->id }}">{{ $sizes->size }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
-                                    <button type="submit" class="btn btn-success px-4 text-white btn-block mb-3">
-                                        Add to cart
-                                    </button>
+                            </div>
+                            <div class="col-lg-2" data-aos="zoom-in">
+
+                                <div class="row d-flex flex-row justify-content-center">
+                                    <div class="mb-4">
+                                        <button class="btn btn-success" id="incrementValueMin">
+                                            -
+                                        </button>
+                                    </div>
+                                    <div class="  mb-4">
+                                        <input id="qtyProduct" type="text" name="quantity" style="width: 30px"
+                                            class="m-1 mt-1 justify-content-center" value="1">
+                                    </div>
+                                    <div class="mb-4">
+                                        <button class="btn btn-success" id="incrementValue">
+                                            +
+                                        </button>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-success px-4 text-white btn-block mb-3">
+                                    Add to cart
+                                </button>
                                 </form>
                             @else
                                 <a href="{{ route('login') }}" class="btn btn-success px-4 text-white btn-block mb-3">

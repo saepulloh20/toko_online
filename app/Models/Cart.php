@@ -12,7 +12,7 @@ class Cart extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'products_id', 'users_id', 'quantity'
+        'products_id', 'users_id', 'quantity', 'sizechart_id'
     ];
 
     protected $hidden = [];
@@ -25,5 +25,10 @@ class Cart extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'users_id', 'id');
+    }
+
+    public function size_chart()
+    {
+        return $this->belongsTo(SizeChart::class,  'sizechart_id', 'id');
     }
 }

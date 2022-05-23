@@ -34,6 +34,7 @@
                                     <td>Name &amp; Seller</td>
                                     <td>Price</td>
                                     <td>Quantity</td>
+                                    <td>size</td>
                                     <td>Menu</td>
                                 </tr>
                             </thead>
@@ -60,6 +61,11 @@
                                         </td>
                                         <td style="width: 20%">
                                             <div class="product-title">{{ number_format($cart->quantity) }}
+                                            </div>
+                                            <div class="product-subtitle"></div>
+                                        </td>
+                                        <td style="width: 20%">
+                                            <div class="product-title">{{ $cart->size_chart->size }}
                                             </div>
                                             <div class="product-subtitle"></div>
                                         </td>
