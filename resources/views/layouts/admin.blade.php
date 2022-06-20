@@ -27,18 +27,24 @@
                     <a href="{{ route('admin-dashboard') }}"
                         class="list-group-item list-group-item-action {{ request()->is('admin/dashboard*') ? 'active' : '' }}">Dashboard</a>
                     <a href="{{ route('admin-products') }}"
-                        class="list-group-item list-group-item-action {{ request()->is('admin/products*') ? 'active' : '' }}">Products</a>
-                    <a href="{{ route('admin-size') }}"
-                        class="list-group-item list-group-item-action {{ request()->is('admin/size*') ? 'active' : '' }}">Size</a>
+                        class="list-group-item list-group-item-action {{ request()->is('admin/products*') ? 'active' : '' }}">Race
+                        Event</a>
+                    <a href="{{ route('admin-') }}"
+                        class="list-group-item list-group-item-action
+                        {{ request()->is('admin/validation*') ? 'active' : '' }}">Validation
+                        Race Event</a>
                     <a href="{{ route('category.index') }}"
-                        class="list-group-item list-group-item-action {{ request()->is('admin/category*') ? 'active' : '' }}">Category</a>
+                        class="list-group-item list-group-item-action {{ request()->is('admin/category*') ? 'active' : '' }}">Category
+                        Race Event</a>
                     <a href="{{ route('transactions') }}"
                         class="list-group-item list-group-item-action {{ request()->is('admin/transaction*') ? 'active' : '' }}">Transactions</a>
                     <a href="{{ route('user.index') }}"
                         class="list-group-item list-group-item-action {{ request()->is('admin/user*') ? 'active' : '' }}">Users</a>
                     <a class="list-group-item list-group-item-action {{ request()->is('admin/logout*') ? 'active' : '' }}"
-                        href="{{ route('logout') }}" onclick="event.preventDefault();
-              document.getElementById('logout-form').submit();">{{ __('Logout') }} </a>
+                        href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+              document.getElementById('logout-form').submit();">{{ __('Logout') }}
+                    </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
@@ -62,8 +68,10 @@
                                             class="rounded-circle mr-2 profile-picture" />Hai, Saep </a>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="{{ route('home') }}">Home</a>
-                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                          document.getElementById('logout-form').submit();">{{ __('Logout') }} </a>
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                          document.getElementById('logout-form').submit();">{{ __('Logout') }}
+                                        </a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                             class="d-none">
                                             @csrf
