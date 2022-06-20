@@ -12,6 +12,7 @@ use App\Models\ProductGallery;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Admin\ProductRequest;
+use App\Models\StockProduct;
 
 class DashboardProductController extends Controller
 {

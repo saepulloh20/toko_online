@@ -22,6 +22,73 @@
             $('#qtyProduct').val(value);
         })
     </script>
+    <script>
+        $(function() {
+
+
+            /* =========================================
+                COUNTDOWN 1
+             ========================================= */
+            $('#clock').countdown('2021/1/10').on('update.countdown', function(event) {
+                var $this = $(this).html(event.strftime('' +
+                    '<span class="h1 font-weight-bold">%D</span> Day%!d' +
+                    '<span class="h1 font-weight-bold">%H</span> Hr' +
+                    '<span class="h1 font-weight-bold">%M</span> Min' +
+                    '<span class="h1 font-weight-bold">%S</span> Sec'));
+            });
+
+            /* =========================================
+                COUNTDOWN 2
+             ========================================= */
+            $('#clock-a').countdown('2021/1/10').on('update.countdown', function(event) {
+                var $this = $(this).html(event.strftime('' +
+                    '<span class="h1 font-weight-bold">%w</span> week%!w' +
+                    '<span class="h1 font-weight-bold">%D</span> Days'));
+            });
+
+            /* =========================================
+                COUNTDOWN 3
+             ========================================= */
+            $('#clock-b').countdown('2021/1/1').on('update.countdown', function(event) {
+                var $this = $(this).html(event.strftime('' +
+                    '<div class="holder m-2"><span class="h1 font-weight-bold">%D</span> Day%!d</div>' +
+                    '<div class="holder m-2"><span class="h1 font-weight-bold">%H</span> Hr</div>' +
+                    '<div class="holder m-2"><span class="h1 font-weight-bold">%M</span> Min</div>' +
+                    '<div class="holder m-2"><span class="h1 font-weight-bold">%S</span> Sec</div>'
+                ));
+            });
+
+
+            /* =========================================
+                COUNTDOWN 4
+             ========================================= */
+            function get15dayFromNow() {
+                return new Date(new Date().valueOf() + 15 * 24 * 60 * 60 * 1000);
+            }
+
+            $('#clock-c').countdown(get15dayFromNow(), function(event) {
+                var $this = $(this).html(event.strftime('' +
+                    '<span class="h1 font-weight-bold">%D</span> Day%!d' +
+                    '<span class="h1 font-weight-bold">%H</span> Hr' +
+                    '<span class="h1 font-weight-bold">%M</span> Min' +
+                    '<span class="h1 font-weight-bold">%S</span> Sec'));
+            });
+
+            /* =========================================
+                CALL TO ACTIONS FOR COUNTDOWN 4
+             ========================================= */
+            $('#btn-reset').click(function() {
+                $('#clock-c').countdown(get15dayFromNow());
+            });
+            $('#btn-pause').click(function() {
+                $('#clock-c').countdown('pause');
+            });
+            $('#btn-resume').click(function() {
+                $('#clock-c').countdown('resume');
+            });
+
+        });
+    </script>
 @endpush
 
 @section('content')
@@ -72,7 +139,30 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-8">
-                            <h1>{{ $product->name }}</h1>
+                            <h2>{{ $product->name }}</h2>
+
+                            <!-- Countdown 4-->
+                            <div class="rounded bg-gradient-4 text-white shadow p-5 text-center mb-2>
+                                <p class="mb-0
+                                font-weight-bold text-uppercase">Count Down</p>
+                                <div id="clock-c" class="countdown py-2"></div>
+
+                                <!-- Call to actions -->
+                                <ul class="list-inline">
+                                    <li class="list-inline-item pt-2">
+                                        <button id="btn-reset" type="button" class="btn btn-demo"><i
+                                                class="glyphicon glyphicon-repeat"></i>Reset</button>
+                                    </li>
+                                    <li class="list-inline-item pt-2">
+                                        <button id="btn-pause" type="button" class="btn btn-demo"><i
+                                                class="glyphicon glyphicon-repeat"></i>Pause</button>
+                                    </li>
+                                    <li class="list-inline-item pt-2">
+                                        <button id="btn-resume" type="button" class="btn btn-demo"><i
+                                                class="glyphicon glyphicon-repeat"></i>Resume</button>
+                                    </li>
+                                </ul>
+                            </div>
                             <div class="owner">By {{ $product->user->store_name }}</div>
                             <div class="price">Rp. {{ number_format($product->price) }}</div>
                             @auth
@@ -140,7 +230,8 @@
                     <div class="col-12 col-lg-8">
                         <ul class="list-unstyled">
                             <li class="media">
-                                <img src="/images/testimonial/icon-testimonial-1.png" class="mr-3 rounded-circle" alt="" />
+                                <img src="/images/testimonial/icon-testimonial-1.png" class="mr-3 rounded-circle"
+                                    alt="" />
                                 <div class="media-body">
                                     <h5 class="mt-2 mb-1">Hazza Risky</h5>
                                     I thought it was not good for living room. I really happy to decided buy this product
@@ -148,7 +239,8 @@
                                 </div>
                             </li>
                             <li class="media">
-                                <img src="/images/testimonial/icon-testimonial-2.png" class="mr-3 rounded-circle" alt="" />
+                                <img src="/images/testimonial/icon-testimonial-2.png" class="mr-3 rounded-circle"
+                                    alt="" />
                                 <div class="media-body">
                                     <h5 class="mt-2 mb-1">Anna Sukkirata</h5>
                                     Color is great with the minimalist concept. Even I thought it was made by Cactus
@@ -156,7 +248,8 @@
                                 </div>
                             </li>
                             <li class="media">
-                                <img src="/images/testimonial/icon-testimonial-3.png" class="mr-3 rounded-circle" alt="" />
+                                <img src="/images/testimonial/icon-testimonial-3.png" class="mr-3 rounded-circle"
+                                    alt="" />
                                 <div class="media-body">
                                     <h5 class="mt-2 mb-1">Dakimu Wangi</h5>
                                     When I saw at first, it was really awesome to have with. Just let me know if there is
@@ -164,10 +257,17 @@
                                 </div>
                             </li>
                         </ul>
+                        <div class="container py-5">
+
+                        </div>
                     </div>
                 </div>
-            </section>
         </div>
+
+    </div>
+    </div>
+    </section>
+    </div>
     </div>
 @endsection
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SizeRequest extends FormRequest
+class StockRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,9 @@ class SizeRequest extends FormRequest
     public function rules()
     {
         return [
-            'size' => 'required max:20',
-            'categories_id' => 'required exists:categories,id'
+            'products_id' => 'required|exists:products,id',
+            'sizecharts_id' => 'exists:size_charts,id',
+            'stock' => 'required|integer',
         ];
     }
 }

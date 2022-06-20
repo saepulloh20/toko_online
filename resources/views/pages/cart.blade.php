@@ -35,6 +35,7 @@
                                     <td>Price</td>
                                     <td>Quantity</td>
                                     <td>size</td>
+                                    <td>size</td>
                                     <td>Menu</td>
                                 </tr>
                             </thead>

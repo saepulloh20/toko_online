@@ -12,8 +12,13 @@ class Category extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'name', 'photo', 'slug'
+        'name', 'photo', 'slug', 'deleted_at'
     ];
 
     protected $hidden = [];
+
+    public function sizechart()
+    {
+        return $this->hasOne(SizeChart::class, 'categories_id', 'id');
+    }
 }

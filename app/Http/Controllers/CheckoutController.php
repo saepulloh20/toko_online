@@ -37,7 +37,7 @@ class CheckoutController extends Controller
         ]);
 
         foreach ($carts as $cart) {
-            $trx = 'TRX-' . mt_rand(000000, 999999);
+            $trx = 'BIB-' . mt_rand(0000, 10000);
             TransactionDetail::create([
                 'transaction_id' => $transaction->id,
                 'products_id' => $cart->product->id,

@@ -10,7 +10,7 @@ class SizeChart extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id', 'size', 'type', 'categories_id'
+        'id', 'size', 'categories_id'
     ];
 
     protected $hidden = [];
@@ -19,4 +19,8 @@ class SizeChart extends Model
     {
         return $this->belongsTo(Category::class, 'categories_id', 'id');
     }
+    // public function product()
+    // {
+    //     return $this->belongsTo(Product::class, 'id', 'categories_id');
+    // }
 }

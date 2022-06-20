@@ -3,20 +3,22 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Product;
-use App\Models\Category;
-use App\Models\sizeChart;
+use App\Models\SizeChart;
+use App\Models\StockProduct;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-use App\Http\Requests\Admin\SizeRequest;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StockRequest;
 use Yajra\DataTables\Facades\DataTables;
 
-class DashboardSizeController extends Controller
+class DashboardStockController extends Controller
+
 {
     public function index()
     {
         if (request()->ajax()) {
-            $query = SizeChart::with('category')->get();
+            $query = StockProduct::with('sizechart', 'product')->get();
             return Datatables::of($query)
                 ->addColumn('action', function ($item) {
                     return '
@@ -39,23 +41,25 @@ class DashboardSizeController extends Controller
                 ->rawColumns(['action'])
                 ->make();
         }
-        return view('pages.admin.size.index');
+        return view('pages.admin.stock.index');
     }
 
     public function create()
     {
-        $categories = Category::all();
+        $sizecharts = SizeChart::with(['category'])->get();
         $products = Product::all();
-        return view('pages.admin.size.create', [
-            'categories' => $categories
+        return view('pages.admin.stock.create', [
+            'sizecharts' => $sizecharts,
+            'products' => $products
         ]);
     }
 
-    public function store(SizeRequest $request)
+    public function store(StockRequest $request)
     {
         $data = $request->all();
-        $size = sizeChart::create($data);
+        $stock = StockProduct::create($data);
 
-        return redirect()->route('admin-size');
+
+        return redirect()->route('admin-stock');
     }
 }
