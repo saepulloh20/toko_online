@@ -141,7 +141,7 @@
                         <div class="col-lg-8">
                             <h2>{{ $product->name }}</h2>
 
-                            <!-- Countdown 4-->
+                            {{-- <!-- Countdown 4-->
                             <div class="rounded bg-gradient-4 text-white shadow p-5 text-center mb-2>
                                 <p class="mb-0
                                 font-weight-bold text-uppercase">Count Down</p>
@@ -162,47 +162,21 @@
                                                 class="glyphicon glyphicon-repeat"></i>Resume</button>
                                     </li>
                                 </ul>
-                            </div>
-                            <div class="owner">By {{ $product->user->store_name }}</div>
+                            </div> --}}
                             <div class="price">Rp. {{ number_format($product->price) }}</div>
                             @auth
                                 <form action="{{ route('detail-add', $product->id) }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
-                                    <div class="form-group">
-                                        <label for="sizechart_id">Size Chart</label>
-                                        <select v-model="sizechart_id" name="sizechart_id">
-                                            @foreach ($size as $sizes)
-                                                <option value="{{ $sizes->id }}">{{ $sizes->size }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
                             </div>
                             <div class="col-lg-2" data-aos="zoom-in">
-
-                                <div class="row d-flex flex-row justify-content-center">
-                                    <div class="mb-4">
-                                        <button class="btn btn-success" id="incrementValueMin">
-                                            -
-                                        </button>
-                                    </div>
-                                    <div class="  mb-4">
-                                        <input id="qtyProduct" type="text" name="quantity" style="width: 30px"
-                                            class="m-1 mt-1 justify-content-center" value="1">
-                                    </div>
-                                    <div class="mb-4">
-                                        <button class="btn btn-success" id="incrementValue">
-                                            +
-                                        </button>
-                                    </div>
-                                </div>
                                 <button type="submit" class="btn btn-success px-4 text-white btn-block mb-3">
-                                    Add to cart
+                                    Register Now
                                 </button>
                                 </form>
                             @else
                                 <a href="{{ route('login') }}" class="btn btn-success px-4 text-white btn-block mb-3">
-                                    Sign in to Add
+                                    Sign in to Register
                                 </a>
                             @endauth
                         </div>
@@ -222,12 +196,12 @@
 
             <section class="store-review">
                 <div class="container">
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-12 col-lg-8 mt-3 mb-3">
                             <h5>Customer Review (3)</h5>
                         </div>
-                    </div>
-                    <div class="col-12 col-lg-8">
+                    </div> --}}
+                    {{-- <div class="col-12 col-lg-8">
                         <ul class="list-unstyled">
                             <li class="media">
                                 <img src="/images/testimonial/icon-testimonial-1.png" class="mr-3 rounded-circle"
@@ -260,7 +234,7 @@
                         <div class="container py-5">
 
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
         </div>
 

@@ -29,7 +29,12 @@
                     <a href="{{ route('dashboard') }} "
                         class="list-group-item list-group-item-action {{ request()->is('dashboard') ? 'active' : '' }}">Dashboard</a>
                     <a href="{{ route('dashboard/transactions') }}"
-                        class="list-group-item list-group-item-action {{ request()->is('dashboard/transactions*') ? 'active' : '' }}">Transactions</a>
+                        class="list-group-item list-group-item-action {{ request()->is('dashboard/transactions*') ? 'active' : '' }}">My
+                        Race
+                        Event</a>
+                    <a href="{{ route('dashboard/validate') }}"
+                        class="list-group-item list-group-item-action {{ request()->is('dashboard/validate*') ? 'active' : '' }}">Submision
+                        Form</a>
                     <a href="{{ route('dashboard-settings-account') }}"
                         class="list-group-item list-group-item-action {{ request()->is('dashboard/account*') ? 'active' : '' }}">My
                         Account</a>
@@ -40,6 +45,7 @@
                         Out</a>
                 </div>
             </div>
+
 
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf

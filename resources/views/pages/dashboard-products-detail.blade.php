@@ -31,7 +31,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label>Product Name</label>
+                      <label>Race Name</label>
                       <input type="text" class="form-control" value="{{ $product->name }}" name="name" />
                     </div>
                   </div>

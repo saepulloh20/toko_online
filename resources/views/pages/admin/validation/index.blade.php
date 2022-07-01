@@ -8,7 +8,7 @@
     <div class="section-content section-dashboard-home" data-aos="fade-up">
         <div class="container-fluid">
             <div class="dashboard-heading">
-                <h2 class="dashboard-title">Admin Dashboard</h2>
+                <h2 class="dashboard-title">Validation Race</h2>
                 <p class="dashboard-subtitle">This is BWA STORE Admin User Panel</p>
             </div>
             <div class="dashboard-content">
@@ -23,8 +23,9 @@
                                             <tr>
                                                 <td>ID</td>
                                                 <td>Nama</td>
-                                                <td>Email</td>
-                                                <td>Roles</td>
+                                                <td>Race Event</td>
+                                                <td>Date</td>
+                                                <td>Status</td>
                                                 <td>Aksi</td>
                                             </tr>
                                         </thead>
@@ -54,16 +55,20 @@
                     name: 'id'
                 },
                 {
-                    data: 'name',
+                    data: 'user.name',
                     name: 'name'
                 },
                 {
-                    data: 'email',
-                    name: 'email'
+                    data: 'product.name',
+                    name: 'Race Event'
                 },
                 {
-                    data: 'roles',
-                    name: 'roles'
+                    data: 'date',
+                    name: 'date',
+                },
+                {
+                    data: 'status',
+                    name: 'status',
                 },
                 {
                     data: 'action',

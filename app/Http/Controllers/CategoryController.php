@@ -13,7 +13,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $products = Product::with('galleries')->simplePaginate(2);
+        $products = Product::with('galleries')->simplePaginate(10);
         return view('pages.category', [
             'categories' => $categories,
             'products' => $products

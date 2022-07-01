@@ -21,12 +21,13 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::get('/categories', [App\Http\Controllers\CategoryController::class, 'index'])->name('categories');
 Route::get('/categories/{id}', [App\Http\Controllers\CategoryController::class, 'detail'])->name('categories-detail');
 Route::get('/detail/{id}', [App\Http\Controllers\DetailController::class, 'index'])->name('detail');
+Route::get('/contact-us', [App\Http\Controllers\ContactUsController::class, 'index'])->name('contact-us');
 Route::post('/detail/{id}', [App\Http\Controllers\DetailController::class, 'add'])->name('detail-add');
 
-Route::get('/success', [App\Http\Controllers\CartController::class, 'success'])->name('success');
+Route::get('/checkout/success', [App\Http\Controllers\CartController::class, 'success'])->name('success');
 
-
-Route::POST('/checkout/callback', [App\Http\Controllers\CheckoutController::class, 'callback'])->name('midtrans-callback');
+Route::get('/checkout/callback', [App\Http\Controllers\CheckoutController::class, 'callback'])->name('midtrans-callback');
+Route::post('/checkout/callback', [App\Http\Controllers\CheckoutController::class, 'callback'])->name('midtrans-callback');
 
 Route::get('/register/success', [App\Http\Controllers\Auth\RegisterController::class, 'success'])->name('register-success');
 
@@ -51,6 +52,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/dashboard/products/gallery/upload', [App\Http\Controllers\DashboardProductController::class, 'uploadGallery'])->name('dashboard/products-gallery-upload');
     Route::get('/dashboard/products/gallery/delete/{id}', [App\Http\Controllers\DashboardProductController::class, 'deleteGallery'])->name('dashboard/products-gallery-delete');
 
+    Route::get('/dashboard/validate', [App\Http\Controllers\DashboardValidateController::class, 'index'])->name('dashboard/validate');
+    Route::get('/dashboard/validate/create', [App\Http\Controllers\DashboardValidateController::class, 'create'])->name('dashboard/validate-create');
+    Route::POST('/dashboard/validate', [App\Http\Controllers\DashboardValidateController::class, 'store'])->name('dashboard/validate-store');
+    Route::get('/dashboard/validate/{id}', [App\Http\Controllers\DashboardValidateController::class, 'details'])->name('dashboard-validate-details');
+
 
 
     Route::get('/dashboard/transactions', [App\Http\Controllers\DashboardTransactionsController::class, 'index'])->name('dashboard/transactions');
@@ -72,6 +78,7 @@ Route::prefix('admin')
         Route::resource('category', App\Http\Controllers\Admin\CategoryController::class);
         Route::resource('user', App\Http\Controllers\Admin\UserController::class);
         Route::resource('product-gallery', App\Http\Controllers\Admin\ProductGalleryController::class);
+        Route::resource('validation', App\Http\Controllers\Admin\DashboardValidationController::class);
         Route::get('/product/transaction-detail/{id}', [App\Http\Controllers\Admin\TransactionController::class, 'details'])->name('dashboard/products-details-admin');
 
 
@@ -82,15 +89,9 @@ Route::prefix('admin')
         Route::post('/products/{id}', [App\Http\Controllers\Admin\DashboardProductController::class, 'update'])->name('admin/products-update');
         Route::post('/products/delete/{id}', [App\Http\Controllers\Admin\DashboardProductController::class, 'destroy'])->name('admin/products-destroy');
 
-        Route::get('validation', [App\Http\Controllers\Admin\DashboardValidationController::class, 'index'])->name('admin-validation');
 
-        Route::get('size', [App\Http\Controllers\Admin\DashboardSizeController::class, 'index'])->name('admin-size');
-        Route::get('size/create', [App\Http\Controllers\Admin\DashboardSizeController::class, 'create'])->name('admin-size/create');
-        Route::post('size/store', [App\Http\Controllers\Admin\DashboardSizeController::class, 'store'])->name('admin-size/store');
 
-        Route::get('stock', [App\Http\Controllers\Admin\DashboardStockController::class, 'index'])->name('admin-stock');
-        Route::get('stock/create', [App\Http\Controllers\Admin\DashboardStockController::class, 'create'])->name('admin-stock/create');
-        Route::post('stock/store', [App\Http\Controllers\Admin\DashboardStockController::class, 'store'])->name('admin-stock/store');
+
 
         Route::post('product/upload', [App\Http\Controllers\Admin\DashboardProductController::class, 'uploadGallery'])->name('products-gallery-upload');
         Route::get('product/delete/{id}', [App\Http\Controllers\Admin\DashboardProductController::class, 'deleteGallery'])->name('products-gallery-delete');

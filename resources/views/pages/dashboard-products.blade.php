@@ -26,7 +26,9 @@
                                     <img src="{{ Storage::url($product->galleries->first()->photos ?? '') }}"
                                         alt="" class="w-100 mb-2" />
                                     <div class="product-title">{{ $product->name }}</div>
-                                    <div class="product-category">{{ $product->category->name }}</div>
+
+                                    <div class="product-category">{{ $product->categories->name }}</div>
+
                                 </div>
                             </a>
                         </div>

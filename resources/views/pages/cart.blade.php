@@ -33,9 +33,6 @@
                                     <td>Image</td>
                                     <td>Name &amp; Seller</td>
                                     <td>Price</td>
-                                    <td>Quantity</td>
-                                    <td>size</td>
-                                    <td>size</td>
                                     <td>Menu</td>
                                 </tr>
                             </thead>
@@ -61,16 +58,6 @@
                                             <div class="product-subtitle"></div>
                                         </td>
                                         <td style="width: 20%">
-                                            <div class="product-title">{{ number_format($cart->quantity) }}
-                                            </div>
-                                            <div class="product-subtitle"></div>
-                                        </td>
-                                        <td style="width: 20%">
-                                            <div class="product-title">{{ $cart->size_chart->size }}
-                                            </div>
-                                            <div class="product-subtitle"></div>
-                                        </td>
-                                        <td style="width: 20%">
                                             <form action="{{ route('cart-delete', $cart->id) }}" method="POST">
                                                 @method('DELETE')
                                                 @csrf
@@ -79,7 +66,7 @@
                                         </td>
                                     </tr>
                                     @php
-                                        $totalPrice = $cart->product->price * $cart->quantity;
+                                        $totalPrice = $cart->product->price;
                                     @endphp
                                 @endforeach
                             </tbody>
@@ -117,8 +104,7 @@
                                 <label for="provinces_id">Province</label>
                                 <select v-model="provinces_id" name="provinces_id" id="provinces_id" class="form-control"
                                     v-if="provinces">
-                                    <option v-for="province in provinces" :value="province.id">
-                                        @{{ province.name }}
+                                    <option v-for="province in provinces" :value="province.id">@{{ province.name }}
                                     </option>
                                 </select>
                                 <select v-else class="form-control"></select>
@@ -135,16 +121,6 @@
                                 </select>
                                 <select v-else class="form-control"></select>
                             </div>
-                            {{-- <div class="form-group">
-                                <label for="regencies_id">Regency</label>
-                                <select v-model="regencies_id" name="regencies_id" id="regencies_id" class="form-control"
-                                    v-if="regencies">
-                                    <option v-for="regency in regencies" :value="regency.id">
-                                        @{{ regency.name }}
-                                    </option>
-                                </select>
-                                <select v-else class="form-control"></select>
-                            </div> --}}
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
@@ -156,12 +132,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="country">Country</label>
-                                <input type="text" class="form-control" id="country" name="country" value="Indonesia" />
+                                <input type="text" class="form-control" id="country" name="country"
+                                    value="Indonesia" />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="phone_number">Phone_number</label>
+                                <label for="phone_number">Phone number</label>
                                 <input type="text" class="form-control" id="phone_number" name="phone_number"
                                     value="{{ $user->phone_number }}" />
                             </div>
@@ -212,7 +189,6 @@
             mounted() {
                 AOS.init();
                 this.getProvincesData();
-                this.provinces_id = <?php echo $user->provinces_id; ?>;
 
             },
             data: {
@@ -241,7 +217,6 @@
                 provinces_id: function(val, oldVal) {
                     this.regencies_id = null;
                     this.getRegenciesData();
-                    this.regencies_id = <?php echo $user->regencies_id; ?>;
                 }
             }
         });

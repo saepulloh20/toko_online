@@ -29,7 +29,7 @@
                     <a href="{{ route('admin-products') }}"
                         class="list-group-item list-group-item-action {{ request()->is('admin/products*') ? 'active' : '' }}">Race
                         Event</a>
-                    <a href="{{ route('admin-') }}"
+                    <a href="{{ route('validation.index') }}"
                         class="list-group-item list-group-item-action
                         {{ request()->is('admin/validation*') ? 'active' : '' }}">Validation
                         Race Event</a>

@@ -15,7 +15,7 @@
                     <a href="{{ route('categories') }}" class="nav-link">Race Event</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Contact Us</a>
+                    <a href="{{ route('contact-us') }}" class="nav-link">Contact Us</a>
                 </li>
             </ul>
         </div>

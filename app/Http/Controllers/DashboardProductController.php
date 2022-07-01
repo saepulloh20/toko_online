@@ -68,7 +68,7 @@ class DashboardProductController extends Controller
 
         $gallery = [
             'products_id' => $product->id,
-            'photos' => $request->file('photo')->store('assets/product', 'public'),
+            'photos' => $request->file('photo')->store('assets/product', 'public')
         ];
 
         ProductGallery::create($gallery);

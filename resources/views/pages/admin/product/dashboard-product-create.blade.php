@@ -32,25 +32,29 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Race Event Registration Start</label>
-                                                <input type="text" class="form-control" name="name" />
+                                                <input type="text" class="form-control" id="datepicker1"
+                                                    name="event_start">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Race Event Registration End</label>
-                                                <input type="text" class="form-control" name="name" />
+                                                <input type="text" class="form-control" id="datepicker2"
+                                                    name="event_end">
                                             </div>
                                         </div>
                                         <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label>Periode Aktivitas Start</label>
-                                                <input type="text" class="form-control" name="name" />
+                                                <input type="text" class="form-control" id="datepicker3"
+                                                    name="active_start">
                                             </div>
                                         </div>
                                         <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label>Periode Aktivitas End</label>
-                                                <input type="text" class="form-control" name="name" />
+                                                <input type="text" class="form-control" id="datepicker4"
+                                                    name="active_end">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -79,13 +83,13 @@
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label>Jenis</label>
-                                                <input type="text" class="form-control" name="name" />
+                                                <input type="text" class="form-control" name="jenis" />
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label>Lokasi</label>
-                                                <input type="text" class="form-control" name="name" />
+                                                <input type="text" class="form-control" name="lokasi" />
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -97,7 +101,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Thumbnails</label>
-                                                <input type="file" name="photo" class="form-control" />
+                                                <input type="file" name="photos" class="form-control" />
                                                 <p class="text-muted">Kamu dapat memilih lebih dari 1 file</p>
                                             </div>
                                         </div>
@@ -118,6 +122,31 @@
 @endsection
 
 @push('addon-script')
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <script>
+        $(function() {
+            $("#datepicker1").datepicker();
+        });
+    </script>
+    <script>
+        $(function() {
+            $("#datepicker2").datepicker();
+        });
+    </script>
+    <script>
+        $(function() {
+            $("#datepicker3").datepicker();
+        });
+    </script>
+    <script>
+        $(function() {
+            $("#datepicker4").datepicker();
+        });
+    </script>
+
     <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
     <script>
         AOS.init();

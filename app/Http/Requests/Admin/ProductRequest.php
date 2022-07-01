@@ -25,6 +25,12 @@ class ProductRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255',
+            'event_start' => 'required|max:255',
+            'event_end' => 'required|max:255',
+            'active_start' => 'required|max:255',
+            'active_end' => 'required|max:255',
+            'jenis' => 'required|string',
+            'lokasi' => 'required|string',
             'users_id' => 'required|exists:users,id',
             'categories_id' => 'required|exists:categories,id',
             'price' => 'required|integer',

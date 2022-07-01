@@ -41,8 +41,6 @@ class CheckoutController extends Controller
             TransactionDetail::create([
                 'transaction_id' => $transaction->id,
                 'products_id' => $cart->product->id,
-                'quantity' => $cart->quantity,
-                'sizechart_id' => $cart->sizechart_id,
                 'price' => $cart->product->price,
                 'shipping_status' => 'PENDING',
                 'resi' => '',
@@ -69,6 +67,8 @@ class CheckoutController extends Controller
             'customer_details' => [
                 'first_name' => Auth::user()->name,
                 'email' => Auth::user()->email,
+                'phone' => Auth::user()->phone_number,
+                '75916882266' => Auth::user()->address_one
             ],
             'enabled_payments' => [
                 'gopay', 'bca_va', 'bank_transfer'
@@ -81,7 +81,7 @@ class CheckoutController extends Controller
             $paymentUrl = Snap::createTransaction($midtrans)->redirect_url;
 
             // Redirect to Snap Payment Page
-            return redirect($paymentUrl);
+            return $paymentUrl;
         } catch (Exception $e) {
             echo $e->getMessage();
         }
@@ -99,8 +99,7 @@ class CheckoutController extends Controller
         $notification = new Notification();
 
         // Asign ke variable untuk melakukan coding
-        $status = $notification->transaction_status;
-        $type = $notification->payment_type;
+        $transaction_status = $notification->transaction_status;
         $fraud = $notification->fraud_status;
         $order_id   = $notification->order_id;
 
@@ -108,27 +107,35 @@ class CheckoutController extends Controller
         $transaction = Transaction::findOrFail($order_id);
 
         // Handle Notifikation Status
-        if ($status == 'capture') {
-            if ($type == 'credit_card') {
-                if ($fraud == 'challenge') {
-                    $transaction->transaction_status = 'PENDING';
-                }
-            } else {
-                $transaction->transaction_status = 'SUCCESS';
+        if ($transaction_status == 'capture') {
+            if ($fraud == 'challenge') {
+                // TODO Set payment status in merchant's database to 'challenge'
+                $transaction->$transaction_status = 'PENDING';
+            } else if ($fraud == 'accept') {
+                // TODO Set payment status in merchant's database to 'success'
+                $transaction->$transaction_status = 'SUCCESS';
             }
-        } elseif ($status == 'settlement') {
-            $transaction->transaction_status = 'SUCCESS';
-        } elseif ($status == 'pending') {
-            $transaction->status = 'PENDING';
-        } elseif ($status == 'deny') {
-            $transaction->status = 'CANCELLED';
-        } elseif ($status == 'expired') {
-            $transaction->status = 'CANCELLED';
-        } elseif ($status == 'cancel') {
-            $transaction->status = 'CANCELLED';
+        } else if ($transaction_status == 'cancel') {
+            if ($fraud == 'challenge') {
+                // TODO Set payment status in merchant's database to 'failure'
+                $transaction->$transaction_status = 'FAILED';
+            } else if ($fraud == 'accept') {
+                // TODO Set payment status in merchant's database to 'failure'
+            }
+        } else if ($transaction_status == 'deny') {
+            // TODO Set payment status in merchant's database to 'failure'
+            $transaction->$transaction_status = 'FAILED';
+        } else if ($transaction_status == 'settlement') {
+            // TODO set payment status in merchant's database to 'Settlement'
+            $transaction->$transaction_status = 'SUCCESS';
+        } else if ($transaction_status == 'pending') {
+            // TODO set payment status in merchant's database to 'Pending'
+            $transaction->$transaction_status = 'PENDING';
+        } else if ($transaction_status == 'expire') {
+            // TODO set payment status in merchant's database to 'expire'
+            $transaction->$transaction_status = 'FAILED';
         }
-
-        // Simpan Transaksi
-        $transaction->save()->redirect('dashboard/transactions');
+        $transaction->save();
+        return view('pages.success');
     }
 }
